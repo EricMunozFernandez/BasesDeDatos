@@ -110,8 +110,8 @@ articulos(articulo, cod_fabricante, peso, categoria),
 CONSTRAINT ven_tie_fk FOREIGN KEY(nif) REFERENCES tiendas(nif)
 );
 
-ALTER TABLE tiendas MODIFY(
-CONSTRAINT nombre_upper_CK CHECK (nombre=INITCAP(nombre))
+ALTER TABLE tiendas ADD(
+CONSTRAINT tien_upper_nombre_CK CHECK (nombre=INITCAP(nombre))
 );
 ALTER TABLE pedidos MODIFY(
 unidades_pedidas NUMBER(6)
@@ -120,7 +120,7 @@ ALTER TABLE ventas MODIFY(
 unidades_vendidas NUMBER(6)
 );
 ALTER TABLE tiendas ADD(
-CONSTRAINT  provincia_No_Toledo_CK CHECK(provincia!=toledo)
+CONSTRAINT  tien_prov_toledo_CK CHECK(provincia!='TOLEDO')
 );
 ALTER TABLE ventas ADD(
 PVP NUMBER(4) DEFAULT 0
@@ -134,3 +134,32 @@ PVP
 ALTER TABLE pedidos DROP(
 PVP
 );
+--COMPROBAR EXISTENCIA DE OBJETOS
+DESCRIBE USER_TABLES;
+SELECT TABLE_NAME FROM USER_TABLES WHERE LOWER(TABLE_NAME) IN ('tiendas','ventas','pedidos','departments','articulos','fabricantes','employees');
+
+--COMPORBAR LAS COLUMNAS DE CADA TABLA
+DESC tiendas
+DESC ventas
+DESC pedidos
+DESC articulos
+DESC fabricantes
+DESC employees
+
+--COMPROBAR LAS RESTRICCIONES
+DESC USER_CONSTRAINTS
+SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME 
+FROM USER_CONSTRAINTS 
+WHERE LOWER(TABLE_NAME) IN ('tiendas','ventas','pedidos','departments','articulos','fabricantes','employees')
+ORDER BY TABLE_NAME;
+
+--COMPROBAR LAS COLUMNAS DE LA RESTRICCION
+DESC USER_CONS_COLUMNS
+SELECT * FROM USER_CONS_COLUMNS
+WHERE LOWER(TABLE_NAME) IN ('tiendas','ventas','pedidos','departments','articulos','fabricantes','employees')
+ORDER BY TABLE_NAME;
+
+--EJERCICIO 4
+DESC USER_CONSTRAINTS
+SELECT TABLE_NAME, CONSTRAINT_NAME, CONSTRAINT_TYPE, OWNER, SEARCH_CONDITION_VC FROM USER_CONSTRAINTS
+WHERE LOWER(TABLE_NAME) IN ('tiendas','ventas','pedidos','departments','articulos','fabricantes','employees');
