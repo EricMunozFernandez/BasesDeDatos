@@ -119,6 +119,9 @@ unidades_pedidas NUMBER(6)
 ALTER TABLE ventas MODIFY(
 unidades_vendidas NUMBER(6)
 );
+ALTER TABLE tiendas ADD(
+CONSTRAINT  provincia_No_Toledo_CK CHECK(provincia!=toledo)
+);
 ALTER TABLE ventas ADD(
 PVP NUMBER(4) DEFAULT 0
 );
