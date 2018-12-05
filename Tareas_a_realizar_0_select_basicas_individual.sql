@@ -8,7 +8,7 @@ SELECT APELLIDO
 FROM EMPLE
 WHERE DEPT_NO=20
 AND UPPER(OFICIO)='ANALISTA'
-ORDER BY APELLIDO, EMP_NO DESC;
+ORDER BY APELLIDO DESC, EMP_NO DESC;
        
 /*    2. Mostrar el apellido, oficio y fecha de alta de los empleados contratados entre
 los meses de mayo y setiembre del año 1981. Obtener la salida ordenada por fecha de alta.*/
