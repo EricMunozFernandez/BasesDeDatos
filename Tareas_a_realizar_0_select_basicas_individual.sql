@@ -16,7 +16,8 @@ los meses de mayo y setiembre del año 1981. Obtener la salida ordenada por fecha
 SELECT APELLIDO, OFICIO, FECHA_ALTA
 FROM EMPLE
 WHERE FECHA_ALTA
-BETWEEN TO_DATE('01/05/1981','DD/MM/YYYY') AND TO_DATE('30/09/1981','DD/MM/YYYY');
+BETWEEN TO_DATE('01/05/1981','DD/MM/YYYY') AND TO_DATE('30/09/1981','DD/MM/YYYY')
+ORDER BY FECHA_ALTA;
        
 /*    3.  Mostrar los apellidos de los empleados concatenados con el oficio, separados por una 
 coma y un espacio en blanco y ordenados por el apellido. Llamar a la columna 'EMPLE y OFI'.*/
