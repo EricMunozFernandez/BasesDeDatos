@@ -88,15 +88,32 @@ FROM EMPLE;
 /*3. Borrar todos los departamentos de la tabla DEPART 
 para los cuales no existan empleados en EMPLE.*/
 
-
+DELETE FROM DEPART 
+WHERE DEPT_NO=(SELECT DEPT_NO
+        FROM EMPLE
+        WHERE EMP_NO IS NULL);
+        
+SELECT *
+FROM DEPART;
 
 /*4. Eliminar a todos los empleados que están en un departamento
 cuyo nombre contiene una 'O'.*/
 
+DELETE FROM EMPLE
+WHERE DEPT_NO LIKE '%O%';
 
+SELECT *
+FROM EMPLE;
 
 /*  5. Incrementa el salario del empleado de apellido REY.
 Su nuevo salario será el que tenía antes más un importe que
 corresponde con la comisión que tiene ARROYO.*/
 
+UPDATE EMPLE
+SET SALARIO=SALARIO+(SELECT COMISION_PCT
+                    FROM EMPLE
+                    WHERE UPPER(APELLIDO)='ARROYO')
+WHERE UPPER(APELLIDO)='REY';
 
+SELECT *
+FROM EMPLE;
