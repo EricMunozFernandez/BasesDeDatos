@@ -955,7 +955,7 @@ AND CLIENTES.CODIGOEMPLEADOREPVENTAS IS NULL;
 /*5.	Listar  el nombre y la ciudad de aquellos clientes 
 que residan en ciudades donde no hay oficinas.
 El resultado saldrá ordenado por la ciudad donde residen.*/
-SELECT * 
+SELECT CIUDAD 
 FROM OFICINAS;
 
 SELECT NOMBRECLIENTE, CIUDAD
@@ -964,7 +964,7 @@ WHERE CODIGOEMPLEADOREPVENTAS IN(SELECT CODIGOEMPLEADO
                                 FROM EMPLEADOS
                                 WHERE CODIGOOFICINA IN(SELECT CODIGOOFICINA
                                                       FROM OFICINAS
-                                                      WHERE CLIENTES.CIUDAD NOT IN(OFICINAS.CIUDAD)))
+                                                      WHERE CLIENTES.CIUDAD NOT IN OFICINAS.CIUDAD))
 ORDER BY CIUDAD;
 
 /*6.	Obtener un listado con los nombres de los clientes 
@@ -973,24 +973,20 @@ El listado tendrá la cabecera “Nombre de los Clientes” y
 los nombres saldrá en formato Título, es decir la primera
 letra de cada palabra en mayúsculas.*/
 
-SELECT NOMBRECLIENTE AS "NOMBRE DE LOS CLIENTES"
+SELECT INITCAP(NOMBRECLIENTE) AS "NOMBRE DE LOS CLIENTES"
 FROM CLIENTES
 WHERE CODIGOCLIENTE IN (SELECT CODIGOCLIENTE
                         FROM PEDIDOS
                         WHERE CODIGOPEDIDO IN (SELECT CODIGOPEDIDO
                                                 FROM DETALLEPEDIDOS
                                                 WHERE CANTIDAD > 200));
-                                                
-ALTER TABLE CLIENTES
-ADD CONSTRAINT CLI_NOMBRE_CK CHECK (NOMBRECLIENTE=INITCAP(NOMBRECLIENTE));
-
 
 /*7.	 Sacar un listado con el nombre de cada cliente y
 el nombre y dos apellidos de su representante de ventas 
 bajo una cabecera única denominada Representante 
 (el nombre irá separado por coma de los apellidos) .*/
 
-SELECT CLIENTES.NOMBRECLIENTE,EMPLEADOS.NOMBRE || APELLIDO1|| ' , ' || APELLIDO2 AS "REPRESENTANTE"
+SELECT CLIENTES.NOMBRECLIENTE,EMPLEADOS.NOMBRE || ', ' ||APELLIDO1|| ' '|| APELLIDO2 AS "REPRESENTANTE"
 FROM EMPLEADOS,CLIENTES
 WHERE CLIENTES.CODIGOEMPLEADOREPVENTAS = EMPLEADOS.CODIGOEMPLEADO;
 
