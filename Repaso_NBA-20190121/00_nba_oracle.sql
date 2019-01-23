@@ -18586,11 +18586,10 @@ Saca el peso en Kilogramos teniendo en cuenta que una libra
 equivale a 0.4535 kilos.
 NOTA: Recuerda que esta en inglés.*/
 
-SELECT JUGADORES.NOMBRE,JUGADORES.ID_EQUIPO,EQUIPOS.NOMBRE,JUGADORES.PESO
+SELECT JUGADORES.NOMBRE,JUGADORES.ID_EQUIPO,EQUIPOS.NOMBRE,JUGADORES.PESO*0.4535 AS "PESO EN KILOS"
 FROM EQUIPOS,JUGADORES
 WHERE EQUIPOS.ID = JUGADORES.ID_EQUIPO AND
-    JUGADORES.PESO BETWEEN 150 AND 300
-    /*AND JUGADORES.PESO=JUGADORES.PESO*0.4535*/;
+    JUGADORES.PESO BETWEEN 150 AND 300;
     
 /*3.	Averigua la relación de jugadores cuya procedencia es
 desconocida, indicando el nombre del jugador y el nombre del
@@ -18624,6 +18623,10 @@ Se ha decidido que serán los 25 primeros jugadores que
 devuelva el sistema.
  NOTA: Hay que usar la pseudo columna del sistema rownum
  en Oracle y Limit en Mysql.*/
+
+SELECT NOMBRE
+FROM JUGADORES
+WHERE ROWNUM<=25;
 
 /*6.	Obtén la división y los equipos de la conferencia
 oeste ordenados por división, y dentro de cada división
@@ -18697,9 +18700,14 @@ actualiza los datos.*/
 SELECT *
 FROM JUGADORES
 WHERE UPPER(NOMBRE)='JORGE GARBAJOSA';
-/*
+--HAY QUE BORRAR LOS HIJOS DE ESTADISTICAS ANTES DE BORRAR EL JUGADOR
+DELETE FROM ESTADISTICAS
+WHERE JUGADOR=(SELECT CODIGO
+                FROM JUGADORES
+                WHERE UPPER(NOMBRE)='JORGE GARBAJOSA');
+
 DELETE FROM JUGADORES
 WHERE UPPER(NOMBRE)='JORGE GARBAJOSA';
-PROBLEMA CON LAS CONSTRAINTS*/
+
 
 
