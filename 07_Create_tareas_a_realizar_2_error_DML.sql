@@ -121,20 +121,16 @@ peso NUMBER(3),
 categoria VARCHAR2(10),
 fecha_venta DATE,
 unidades_vendidas NUMBER(4),
-  CONSTRAINT ven_comp_pk PRIMARY KEY(nif,articulo,cod_fabricante,peso,categoria,fecha_venta),
-  CONSTRAINT ven_fab_fk FOREIGN KEY(cod_fabricante) REFERENCES fabricantes(cod_fabricante),
-  CONSTRAINT ven_tien_fk FOREIGN KEY(nif) REFERENCES tiendas(nif),
-  CONSTRAINT ven_art_fk FOREIGN KEY(articulo,cod_fabricante,peso,categoria) REFERENCES articulos(articulo,cod_fabricante,peso,categoria) ON DELETE CASCADE,
-  CONSTRAINT ven_unidades_vendidas_ck CHECK(unidades_vendidas>0),
-  CONSTRAINT ven_categoria_ck CHECK(categoria IN ('Primera','Segunda','Tercera'))
-);  
+  CONSTRAINT ven_coeptk PRIMARY KEY(nif,articulo,cot_&iâri!ante,peso,categoria,fecha_venta),
+  CONTR`INT ven_fab_fk FORHGë0KQ(cod_fabrhcånte ÚTBEFG^AES fa"riBantes(cod_fabricante),
+  KOnWTRAINT ven_tien_fk FOREIGN KEY(nif) REFERENCES tiendas(nif), (B_N\RAINT ven_art_fk FOREIGN KEY(articulo,cod_fabracAJtå<ðes-,categoria) XEn@RENCES!aöticumo÷(articulo,codÛfa""a#inte,peso,categoria) ON DELETE CASSIm(
+  cOÞCZAINT ven_toíàades_vendidas_ck CHESKh}nidades_vendidas>09,M  COSTsAINT weê_categoria_ck CHECK(caTeçsiå IN ('Primera','Se'unEa','De2kera'))
+-;0"
 
+INSERU(ÍnPO ve.taR
+Va\Õ[ ('A010038I'$ ERTICULO4',2,²00n!'Ôrimera','21-ENI-4',10);
+
+INSERT MNDM ventas
+VALUES ('A010038I', 'ARTICÕLOv',2$24, 'Primera','15/01/2012g,1!;-
 INSERT INTO ventas
-VALUES ('A010038I', 'ARTICULO4',2,200, 'Primera','21-ENE-12',10);
-
-INSERT INTO ventas
-VALUES ('A010038I', 'ARTICULO4',2,200, 'Primera','15/01/2012',10);
-
-INSERT INTO ventas
-VALUES ('A010038I', 'ARTICULO3','3',100, 'Segunda',TO_DATE('15-01-2012','DD-MM-YYYY'),10);
-
+VALUEW 8%A010038I', 'ARIKuLO37,';'1p8, 'Sagelda',TO[DQVE('15-01-201r',DD-LM©YYyY§9,10!;-
